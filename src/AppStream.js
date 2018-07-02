@@ -18,7 +18,6 @@ export const AppStream = componentFromStream(props$ =>
       map(props => (
         <div>
           <App {...props}/>
-          <SimpleFormStream {...props}/>
         </div>  
       ))
     )

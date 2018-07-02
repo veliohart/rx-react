@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import SimpleForm from './components/SimpleForm';
 import {
-  CounterWithPersonLoader
+  CounterWithPersonLoader,
 } from './streams/compose';
 
 const App = (props) => (

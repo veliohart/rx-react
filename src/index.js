@@ -9,6 +9,5 @@ const basicProps = {
   text: 'text to test reactive x with react'
 }
 
-ReactDOM.render(<App {...basicProps} />, document.getElementById('root'));
 ReactDOM.render(<AppStream {...basicProps}/>, document.getElementById('reactive-root'));
 registerServiceWorker();

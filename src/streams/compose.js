@@ -30,7 +30,7 @@ const count = mapPropsStream(props$ => {
       onInc$.pipe(mapTo(1)),
       onDec$.pipe(mapTo(-1))
     ).pipe(
-      startWith(0),
+      startWith(1),
       scan((acc, curr) => acc + curr)
     ),
     (props, count) => ({
@@ -50,11 +50,11 @@ const load = mapPropsStream(props$ => props$.pipe(
   (props, person) => ({ ...props, person }))
 ))
 
-const typewriter = mapPropsStream(props$ => props$.pipe(
+const typewriterStream = mapPropsStream(props$ => props$.pipe(
   switchMap(
     props => zip(
       from(props.person.name),
-      interval(20),
+      interval(100),
       letter => letter
     ).pipe(
       scan((acc, curr) => acc + curr)
@@ -66,7 +66,9 @@ const typewriter = mapPropsStream(props$ => props$.pipe(
   )
 ))
 
-const Counter = props => (
+const Counter = props => {
+  console.log(props)
+  return (
   <div>
     <button onClick={props.handleInc}>+</button>
     <button onClick={props.handleDec}>-</button>
@@ -74,10 +76,15 @@ const Counter = props => (
     <h3>{props.count}</h3>
     <h3>{props.person.name}</h3>
   </div>
-);
+)
+};
+
+const CounterStream = compose(
+  count
+)(Counter);
 
 export const CounterWithPersonLoader = compose(
   count,
   load,
-  typewriter
+  typewriterStream
 )(Counter)
